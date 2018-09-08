@@ -1,0 +1,5 @@
+fp1:
+  name: Example
+  email: fp1@example.com
+  password_digest: <%= Fp.digest('password') %>
+  
