@@ -1,24 +1,52 @@
-# README
+# ファイナンシャル・プランナー予約システム
+## システム概要
+ユーザーが FP との相談を予約できるシステム
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+※Railsの勉強課題用
 
-Things you may want to cover:
+## Ruby version
 
-* Ruby version
+`2.5.1`
 
-* System dependencies
+## テーブル定義
 
-* Configuration
+#### リレーション
+* "Users" has many "Reservations"
+* "Fps" has many "Reservations"
+* "Reservations" belongs to "User"
+* "Reservations" belongs to "Fp"
 
-* Database creation
+#### Users
+* NN -> Not Null
+* UQ -> Unique
 
-* Database initialization
+|カラム名|属性|NN|UQ|Index|
+|:--:|:--:|:--:|:--:|:--:|
+|id|integer|T|T|T|
+|name|string|T|F|F|
+|email|string|T|T|T|
+|password_digest|string|T|F|F|
+|created_at|datetime|T|F|F|
+|updated_at|datetime|T|F|F|
 
-* How to run the test suite
+#### Fps
 
-* Services (job queues, cache servers, search engines, etc.)
+|カラム名|属性|NN|UQ|Index|
+|:--:|:--:|:--:|:--:|:--:|
+|id|integer|T|T|T|
+|name|string|T|F|F|
+|email|string|T|T|T|
+|password_digest|string|T|F|F|
+|created_at|datetime|T|F|F|
+|updated_at|datetime|T|F|F|
 
-* Deployment instructions
+#### Reservations
 
-* ...
+|カラム名|属性|NN|UQ|Index|
+|:--:|:--:|:--:|:--:|:--:|
+|id|integer|T|T|T|
+|user_id|integer|T|F|T|
+|fp_id|integer|T|F|T|
+|reserved_at|datetime|T|F|F|
+|created_at|datetime|T|F|F|
+|updated_at|datetime|T|F|F|
