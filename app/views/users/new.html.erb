@@ -1,3 +1,9 @@
-<% provide(:title, 'Users Sign up') %>
-<h1>Users Sign up</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<% provide(:title      , 'User Sign up') %>
+<% provide(:url        ,  users_signup_path) %>
+<% provide(:button_text, 'ユーザ登録') %>
+<h1>ユーザ登録</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= render  "layouts/signup_form", object: @user %>
+  </div>
+</div>
