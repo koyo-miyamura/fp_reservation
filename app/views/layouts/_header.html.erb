@@ -7,8 +7,10 @@
         <% if logged_in? %>
           <% if logged_in_user? %>
             <li><%= link_to "予約", "#" %></li>
+            <li><%= link_to "編集", edit_user_path %></li>
             <li><%= link_to "マイページ", current_user %></li>
           <% elsif logged_in_fp? %>
+            <li><%= link_to "編集", edit_fp_path %></li>
             <li><%= link_to "マイページ", current_fp %></li>
           <% end %>
           <li>
