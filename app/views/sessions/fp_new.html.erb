@@ -1,0 +1,10 @@
+<% provide(:title, "FP ログイン") %>
+<h1>FP ログイン</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+  <% provide(:login_path,  fps_login_path) %>
+  <% provide(:signup_path, fps_signup_path) %>
+  <%= render  "login_form" %>
+  </div>
+</div>

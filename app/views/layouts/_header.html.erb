@@ -4,16 +4,31 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "ホーム", root_path %></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            ログイン <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <li><%= link_to "ユーザ", "#" %></li>
-            <li class="divider"></li>
-            <li><%= link_to "FP", "#" %></li>
-          </ul>
-        </li>
+        <% if logged_in? %>
+          <% if logged_in_user? %>
+            <li><%= link_to "予約", "#" %></li>
+            <li><%= link_to "マイページ", current_user %></li>
+          <% elsif logged_in_fp? %>
+            <li><%= link_to "マイページ", current_fp %></li>
+          <% end %>
+          <li>
+            <%= link_to "ログアウト", logout_path,
+              method: :delete,
+              data: {confirm: "ログアウトしますか？"}
+            %>
+          </li>
+        <% else %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              ログイン <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "ユーザ", users_login_path %></li>
+              <li class="divider"></li>
+              <li><%= link_to "FP", fps_login_path %></li>
+            </ul>
+          </li>
+        <% end %>
       </ul>
     </nav>
   </div>

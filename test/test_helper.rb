@@ -4,9 +4,31 @@ require "minitest/reporters"
 Minitest::Reporters.use!
 
 class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
   include ApplicationHelper
+  include SessionsHelper
 
-  # Add more helper methods to be used by all tests here...
+  def logged_in_user_as_test?
+    !session[:user_id].nil? && session[:role] == User_role_num
+  end
+
+  def logged_in_fp_as_test?
+    !session[:fp_id].nil? && session[:role] == Fp_role_num
+  end
+end
+
+class ActionDispatch::IntegrationTest
+
+  # テストユーザーとしてログインする
+  def log_in_user_as_test(user, password: 'password')
+    # テストでは直接セッション扱えないのでpostする
+    post users_login_path, params: { session: { email:    user.email,
+                                                password: password} }
+  end
+
+  # テストFPとしてログインする
+  def log_in_fp_as_test(fp, password: 'password')
+    post fps_login_path, params: { session: { email:    fp.email,
+                                              password: password} }
+  end
 end
