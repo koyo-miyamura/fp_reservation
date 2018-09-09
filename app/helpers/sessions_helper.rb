@@ -33,20 +33,14 @@ module SessionsHelper
 
   # 現在ログイン中のユーザを返す (いる場合)
   def current_user
-    unless session[:role] == User_role_num
-      return
-    end
-    if session[:user_id]
+    if session[:user_id] && session[:role] == User_role_num
       @current_user ||= User.find_by(id: session[:user_id]) # 2回目以降のクエリを防ぐ
     end
   end
 
   # 現在ログイン中のFPを返す (いる場合)
   def current_fp
-    unless session[:role] == Fp_role_num
-      return
-    end
-    if session[:fp_id]
+    if session[:fp_id] && session[:role] == Fp_role_num
       @current_fp ||= Fp.find_by(id: session[:fp_id]) # 2回目以降のクエリを防ぐ
     end
   end

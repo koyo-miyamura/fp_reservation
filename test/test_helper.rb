@@ -6,7 +6,15 @@ Minitest::Reporters.use!
 class ActiveSupport::TestCase
   fixtures :all
   include ApplicationHelper
+  include SessionsHelper
 
+  def logged_in_user_as_test?
+    !session[:user_id].nil? && session[:role] == User_role_num
+  end
+
+  def logged_in_fp_as_test?
+    !session[:fp_id].nil? && session[:role] == Fp_role_num
+  end
 end
 
 class ActionDispatch::IntegrationTest
