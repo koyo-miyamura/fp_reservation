@@ -1,3 +1,9 @@
-<% provide(:title, 'FP Sign up') %>
-<h1>FP Sign up</h1>
-<p>Find me in app/views/fps/new.html.erb</p>
+<% provide(:title      , 'FP Sign up') %>
+<% provide(:url        ,  fps_signup_path) %>
+<% provide(:button_text, 'FP登録') %>
+<h1>FP 登録</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= render "layouts/signup_form", object: @fp %>
+  </div>
+</div>
