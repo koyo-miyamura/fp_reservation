@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180908163532) do
+ActiveRecord::Schema.define(version: 20180910085228) do
+
+  create_table "fp_reservable_times", force: :cascade do |t|
+    t.integer "fp_id", null: false
+    t.datetime "reservable_on", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fp_id", "reservable_on"], name: "index_fp_reservable_times_on_fp_id_and_reservable_on"
+    t.index ["fp_id"], name: "index_fp_reservable_times_on_fp_id"
+  end
 
   create_table "fps", force: :cascade do |t|
     t.string "name", null: false
@@ -19,6 +28,18 @@ ActiveRecord::Schema.define(version: 20180908163532) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_fps_on_email", unique: true
+  end
+
+  create_table "reservations", force: :cascade do |t|
+    t.integer "fp_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "reserved_on", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fp_id", "reserved_on"], name: "index_reservations_on_fp_id_and_reserved_on"
+    t.index ["fp_id"], name: "index_reservations_on_fp_id"
+    t.index ["user_id", "reserved_on"], name: "index_reservations_on_user_id_and_reserved_on"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

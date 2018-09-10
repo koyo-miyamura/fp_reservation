@@ -1,4 +1,7 @@
 class Fp < ApplicationRecord
+  has_many :reservations,        dependent: :destroy
+  has_many :fp_reservable_times, dependent: :destroy
+  has_many :reserved_users, through: :reservations, source: :user
   before_save { email.downcase! } # 今回はemailの大文字・小文字を区別しない
   validates :name,  presence: true, length: { maximum: 50 }
   validates :email, presence: true,

@@ -47,8 +47,18 @@
 |カラム名|属性|NN|UQ|Index|
 |:--:|:--:|:--:|:--:|:--:|
 |id|integer|T|T|T|
-|user_id|integer|T|F|T|
 |fp_id|integer|T|F|T|
-|reserved_at|datetime|T|F|F|
+|user_id|integer|T|F|T|
+|reserved_on|datetime|T|F|T|
+|created_at|datetime|T|F|F|
+|updated_at|datetime|T|F|F|
+
+#### Fp_reservable_times
+
+|カラム名|属性|NN|UQ|Index|
+|:--:|:--:|:--:|:--:|:--:|
+|id|integer|T|T|T|
+|fp_id|integer|T|F|T|
+|reservable_on|datetime|T|F|T|
 |created_at|datetime|T|F|F|
 |updated_at|datetime|T|F|F|
