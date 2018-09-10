@@ -1,0 +1,11 @@
+<% provide(:title      , 'Fp edit') %>
+<% provide(:url        ,  fp_path) %>
+<% provide(:button_text, '更新する') %>
+<h1>FP情報の更新</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= render  "layouts/form", object: @fp %>
+    <%= link_to "退会", fp_path(@fp), method: :delete,
+        data: { confirm: "本当に退会してもいいですか？（復元できません）"} %>
+  </div>
+</div>

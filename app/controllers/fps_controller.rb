@@ -26,13 +26,13 @@ class FpsController < ApplicationController
   end
 
   def update
-    # @fp = User.find(params[:id])
-    # if @fp.update_attributes(fp_params)
-    #   flash[:success] = "Profile updated"
-    #   redirect_to @fp
-    # else
-    #   render 'edit'
-    # end
+    @fp = Fp.find(params[:id])
+    if @fp.update_attributes(fp_params)
+      flash[:success] = "更新しました"
+      redirect_to @fp
+    else
+      render 'edit'
+    end
   end
 
   def destroy
