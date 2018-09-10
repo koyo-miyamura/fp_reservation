@@ -20,6 +20,9 @@ gem 'bcrypt'                 , '3.1.12'
 gem 'jquery-rails'           , '4.3.1'
 gem 'faker'                  , '1.7.3'
 gem 'kaminari'               , '1.1.1'
+gem 'momentjs-rails'         , '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
+gem 'font-awesome-rails'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'

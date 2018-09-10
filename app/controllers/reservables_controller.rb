@@ -1,8 +1,13 @@
 class ReservablesController < ApplicationController
-  before_action :logged_in_fp, only: [:new, :destroy]
-  before_action :correct_fp,   only: [:new, :destroy]
+  before_action :logged_in_fp, only: [:new, :create, :destroy]
+  before_action :correct_fp,   only: [:new, :create, :destroy]
 
   def new
+    @reservable = FpReservableTime.new()
+  end
+
+  def create
+    # @reservable = FpReservableTime.new()
   end
 
   private

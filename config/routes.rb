@@ -15,12 +15,14 @@ Rails.application.routes.draw do
 
   resources :fps do
     member do
-      get "reservables", to: 'reservables#new'
+      get  "reservables", to: 'reservables#new'
+      post "reservables", to: 'reservables#create'
     end
   end
   resources :users do
     member do
-      get "reservations", to: 'reservations#new'
+      get  "reservations", to: 'reservations#new'
+      post "reservations", to: 'reservations#create'
     end
   end
 end
