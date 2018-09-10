@@ -7,7 +7,9 @@ class FpsController < ApplicationController
   end
 
   def show
-    @fp = Fp.find(params[:id])
+    fp = Fp.find(params[:id])
+    @fp_reservable_times = fp.fp_reservable_times.page(params[:reservable_page])
+    @fp_reservations     = fp.reservations.page(params[:reservation_page])
   end
 
   def create
@@ -60,7 +62,7 @@ class FpsController < ApplicationController
 
     # 正しいユーザーかどうか確認
     def correct_fp
-      @fp = Fp.find(params[:id])
+      @fp ||= Fp.find(params[:id])
       unless current_fp?(@fp)
         flash[:danger] = "権限がありません"
         redirect_to root_url
