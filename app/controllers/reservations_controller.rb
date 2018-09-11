@@ -3,7 +3,7 @@ class ReservationsController < ApplicationController
   before_action :correct_user,   only: [:new, :index, :destroy]
 
   def new
-    @fps = Fp.all.page(params[:id])
+    @fps = Fp.all.includes(:fp_reservable_times).page(params[:id])
   end
 
   def create
