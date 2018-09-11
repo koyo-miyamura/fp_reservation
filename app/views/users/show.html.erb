@@ -6,12 +6,13 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>日付</th><th>時間</th><th>アクション</th>
+            <th>FP名前</th><th>日付</th><th>時間</th><th>アクション</th>
           </tr>
         </thead>
         <tbody>
           <% @user_reservations.each do |f| %>
             <tr>
+              <td><%= f.fp.name %></td>
               <td><%= f.reserved_on.strftime("%Y/%m/%d")%></td>
               <td><%= f.consultation_period %></td>
               <td><%= link_to  "予約取り消し", user_reservation_path(@user, f),

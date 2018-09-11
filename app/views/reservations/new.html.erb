@@ -1,7 +1,7 @@
 <% provide(:title, current_user.name) %>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <div class="panel panel-success table-responsive">
+    <div class="panel panel-info table-responsive">
       <div class="panel-heading"><b>予約</b></div>
       <table class="table table-striped">
         <thead>
@@ -16,7 +16,8 @@
                 <td><%= fp.name %></td>
                 <td><%= reservable_time.reservable_on.strftime("%Y/%m/%d") %></td>
                 <td><%= reservable_time.consultation_period %></td>
-                <td><%= link_to  "予約する", user_reservations_path(@user),
+                <td><%= link_to  "予約する", user_reservations_path(@user,
+                      params: { reservable_id: reservable_time.id, fp_id: fp.id } ),
                       method: :post, 
                       data: {confirm: "#{reservable_time.consultation_period}で予約しますか？"} 
                     %>
