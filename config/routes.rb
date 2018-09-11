@@ -18,10 +18,7 @@ Rails.application.routes.draw do
   resources :fps do
     resources :fp_reservable_times, only: [:new, :create, :destroy]
   end
-  resources :users do
-    member do
-      get  "reservations",  to: 'reservations#new'
-      post "reservations",  to: 'reservations#create'
-    end
+  resources :users, except: [:new] do
+    resources :reservations, only: [:new, :create, :destroy]
   end
 end

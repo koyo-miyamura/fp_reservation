@@ -7,6 +7,12 @@ class ReservationsController < ApplicationController
 
   def new
   end
+
+  def destroy
+    Reservation.find(params[:id]).destroy
+    flash[:success] = "予約削除しました"
+    redirect_to root_url
+  end
   
   private
     # beforeアクション
@@ -21,7 +27,7 @@ class ReservationsController < ApplicationController
 
     # 正しいユーザーかどうか確認
     def correct_user
-      @user = User.find(params[:id])
+      @user = User.find(params[:user_id])
       unless current_user?(@user)
         flash[:danger] = "権限がありません"
         redirect_to root_url

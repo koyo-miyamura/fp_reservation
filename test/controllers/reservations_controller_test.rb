@@ -8,7 +8,7 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
-    get reservations_user_path(@user)
+    get new_user_reservation_path(@user)
     assert_response :success
   end
 end

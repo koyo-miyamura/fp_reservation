@@ -14,7 +14,7 @@
             <tr>
               <td><%= f.reserved_on.strftime("%Y/%m/%d")%></td>
               <td><%= f.consultation_period %></td>
-              <td><%= link_to  "予約取り消し", reservations_path(f),
+              <td><%= link_to  "予約取り消し", user_reservation_path(@user, f),
                   method: :delete, data: {confirm: "予約取り消してもよろしいですか？"} %>
               </td>
             </tr>
