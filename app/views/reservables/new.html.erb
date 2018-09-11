@@ -1,16 +1,17 @@
 <% provide(:title, @fp.name + "予約時間の設定") %>
-<h1>予約</h1>
+<h1>予約受付 時間設定</h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <ul>
-      <li>平日 10:30 ~ 18:30</li>
+      <li>平日 10:00 ~ 18:00</li>
       <li>土曜 11:00 ~ 15:00</li>
       <li>日曜休業</li>
+      <li>入力は30分刻みで開始時間を入力してください</li>
     </ul>
     <%= form_for(@reservable, url: reservables_fp_path) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :"予約を受け付ける日付" %>
+      <%= f.label :"予約を受け付ける時間" %>
       <%= f.text_field :reservable_on, class: 'form-control datetimepicker' %>
 
       <%= f.submit "予約する", class: "btn btn-primary" %>

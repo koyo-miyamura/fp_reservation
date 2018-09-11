@@ -1,3 +1,5 @@
+include ReservablesHelper
+
 class ReservablesController < ApplicationController
   before_action :logged_in_fp, only: [:new, :create, :destroy]
   before_action :correct_fp,   only: [:new, :create, :destroy]
@@ -7,7 +9,30 @@ class ReservablesController < ApplicationController
   end
 
   def create
-    # @reservable = FpReservableTime.new()
+    str_reservable_on = params["fp_reservable_time"]["reservable_on"]
+    begin
+      # DatetimeオブジェクトではなくTimeオブジェクトにしないと日本タイムゾーンにならない
+      reservable_on = Time.strptime(str_reservable_on, "%Y/%m/%d %H:%M")
+    rescue => exception
+      flash[:danger] = "入力形式が不正です"
+      redirect_to reservables_fp_url
+      return
+    end
+
+    ok, err = is_correct_datetime?(reservable_on)
+    unless ok
+      flash[:danger] = err
+      redirect_to reservables_fp_url
+      return
+    end
+
+    fp_reservable_time = FpReservableTime.new(fp_id: current_fp.id, reservable_on: reservable_on)
+    if fp_reservable_time.save
+      flash[:success] = "予約受付時間を更新しました"
+      redirect_to reservables_fp_url
+    else
+      render 'reservables/new'
+    end
   end
 
   private
