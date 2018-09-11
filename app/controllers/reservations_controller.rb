@@ -2,10 +2,11 @@ class ReservationsController < ApplicationController
   before_action :logged_in_user, only: [:new, :index, :destroy]
   before_action :correct_user,   only: [:new, :index, :destroy]
 
-  def index
+  def new
+    @fps = Fp.all.page(params[:id])
   end
 
-  def new
+  def create
   end
 
   def destroy
