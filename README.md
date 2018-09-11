@@ -17,6 +17,8 @@
 * "Fps" has many "Reservations"
 * "Reservations" belongs to "User"
 * "Reservations" belongs to "Fp"
+* "Fp" has many "Fp_reservable_times"
+* "Fp_reservable_times" belongs to "Fp"
 
 #### Users
 * NN -> Not Null
