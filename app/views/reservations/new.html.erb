@@ -1,2 +1,33 @@
-<h1>Reservations#new</h1>
-<p>Find me in app/views/reservations/new.html.erb</p>
+<% provide(:title, current_user.name) %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-info table-responsive">
+      <div class="panel-heading"><b>予約</b></div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>名前</th><th>日付</th><th>時間</th><th>アクション</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @fps.each do |fp| %>
+            <% fp.fp_reservable_times.each do |reservable_time| %>
+              <tr>
+                <td><%= fp.name %></td>
+                <td><%= reservable_time.reservable_on.strftime("%Y/%m/%d") %></td>
+                <td><%= reservable_time.consultation_period %></td>
+                <td><%= link_to  "予約する", user_reservations_path(@user,
+                      params: { reservable_id: reservable_time.id, fp_id: fp.id } ),
+                      method: :post, 
+                      data: {confirm: "#{reservable_time.consultation_period}で予約しますか？"} 
+                    %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= paginate @fps %>
+  </div>
+</div>

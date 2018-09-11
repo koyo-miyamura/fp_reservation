@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ReservablesControllerTest < ActionDispatch::IntegrationTest
+class FpReservableTimesControllerTest < ActionDispatch::IntegrationTest
 
   def setup
     @fp = fps(:fp1)
@@ -8,7 +8,7 @@ class ReservablesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
-    get reservables_fp_path(@fp)
+    get new_fp_fp_reservable_time_path(@fp)
     assert_response :success
   end
 end

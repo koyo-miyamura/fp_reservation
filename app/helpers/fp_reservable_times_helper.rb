@@ -1,4 +1,4 @@
-module ReservablesHelper
+module FpReservableTimesHelper
 
   # DatetimeオブジェクトではなくTimeオブジェクトを入力する
   def is_correct_datetime?(time_obj)

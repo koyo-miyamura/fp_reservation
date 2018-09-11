@@ -6,13 +6,17 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>日付</th><th>時間</th>
+            <th>日付</th><th>時間</th><th>アクション</th>
           </tr>
         </thead>
         <tbody>
           <% @fp_reservable_times.each do |f| %>
             <tr>
-              <td><%= f.reservable_on.strftime("%Y/%m/%d") %></td><td><%= f.consultation_period %></td>
+              <td><%= f.reservable_on.strftime("%Y/%m/%d") %></td>
+              <td><%= f.consultation_period %></td>
+              <td><%= link_to  "取り消し",  fp_fp_reservable_time_path(@fp, f),
+                  method: :delete, data: {confirm: "予約受付を取り消してもよろしいですか？"} %>
+              </td>
             </tr>
           <% end %>
         </tbody>

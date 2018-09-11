@@ -14,13 +14,13 @@
         <li><%= link_to "ホーム", root_path %></li>
         <% if logged_in? %>
           <% if logged_in_user? %>
-            <li><%= link_to "予約", reservations_user_path %></li>
-            <li><%= link_to "編集", edit_user_path %></li>
+            <li><%= link_to "予約", new_user_reservation_path(current_user) %></li>
+            <li><%= link_to "編集", edit_user_path(current_user) %></li>
             <li><%= link_to "マイページ", current_user %></li>
           <% elsif logged_in_fp? %>
             <li><%= link_to "マイページ", current_fp %></li>
-            <li><%= link_to "編集", edit_fp_path %></li>
-            <li><%= link_to "予約", reservables_fp_path %></li>
+            <li><%= link_to "編集", edit_fp_path(current_fp) %></li>
+            <li><%= link_to "予約", new_fp_fp_reservable_time_path(current_fp) %></li>
           <% end %>
           <li>
             <%= link_to "ログアウト", logout_path,
