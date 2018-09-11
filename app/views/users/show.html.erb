@@ -1,4 +1,27 @@
 <% provide(:title, @user.name) %>
-<h1>
-  <%= @user.name %>
-</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-success table-responsive">
+      <div class="panel-heading"><b>予約した相談</b></div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>日付</th><th>時間</th><th>アクション</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user_reservations.each do |f| %>
+            <tr>
+              <td><%= f.reserved_on.strftime("%Y/%m/%d")%></td>
+              <td><%= f.consultation_period %></td>
+              <td><%= link_to  "予約取り消し", reservations_path(f),
+                  method: :delete, data: {confirm: "予約取り消してもよろしいですか？"} %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= paginate @user_reservations %>
+  </div>
+</div>

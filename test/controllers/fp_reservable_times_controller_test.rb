@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ReservablesControllerTest < ActionDispatch::IntegrationTest
+class FpReservableTimesController < ActionDispatch::IntegrationTest
 
   def setup
     @fp = fps(:fp1)
