@@ -1,4 +1,43 @@
 <% provide(:title, @fp.name) %>
-<h1>
-  <%= @fp.name %>
-</h1>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-info table-responsive">
+      <div class="panel-heading"><b>予約受付中</b></div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>日付</th><th>時間</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @fp_reservable_times.each do |f| %>
+            <tr>
+              <td><%= f.reservable_on.strftime("%Y/%m/%d") %></td><td><%= f.consultation_period %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= paginate @fp_reservable_times, param_name: 'reservable_page'  %>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-success table-responsive">
+      <div class="panel-heading"><b>予約済</b></div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>日付</th><th>時間</th><th>氏名</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @fp_reservations.each do |f| %>
+            <tr>
+              <td><%= f.reserved_on.strftime("%Y/%m/%d")%></td><td><%= f.consultation_period %></td><td><%= f.user.name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= paginate @fp_reservations, param_name: 'reservation_page' %>
+  </div>
+</div>

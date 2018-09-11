@@ -68,4 +68,31 @@ class UserTest < ActiveSupport::TestCase
     assert_equal mixed_case_email.downcase, @user.reload.email
   end
 
+  test "associated reservations should be destroyed" do
+    @user.save # destoryするにはsaveが必要
+    fp = fps(:fp1)
+    @user.reservations.create!(fp_id: fp.id, reserved_on: DateTime.now)
+    assert_difference 'Reservation.count', -1 do
+      @user.destroy
+    end
+  end
+
+  test "should have many reservations" do
+    reservation1 = @user.reservations.build(fp_id: 1, reserved_on: 10.minutes.ago)  
+    reservation2 = @user.reservations.build(fp_id: 2, reserved_on: 10.minutes.ago)  
+    assert @user.reservations.include?(reservation1)
+    assert @user.reservations.include?(reservation2)
+  end
+
+  test "should have many reserving_fps" do
+    user = users(:user1) # DBに登録されていないと2つ以上リレーションをたどるテスト通らない
+    fp1  = fps(:fp1)
+    fp2  = fps(:fp2)
+    # buildでは2つ以上たどるリレーションが生成されない様子
+    user.reservations.create(fp_id: fp1.id, reserved_on: 10.minutes.ago)  
+    user.reservations.create(fp_id: fp2.id, reserved_on: 10.minutes.ago)  
+    assert user.reserving_fps.include?(fp1)
+    assert user.reserving_fps.include?(fp2)
+  end
+
 end

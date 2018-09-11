@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fp_id: 1
+  reservable_on: <%= 10.minutes.ago %>
+
+two:
+  fp_id: 1
+  reservable_on: <%= 11.minutes.ago %>
