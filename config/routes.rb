@@ -13,12 +13,10 @@ Rails.application.routes.draw do
   post   'fps/login',     to: 'sessions#fp_create'
   delete '/logout',       to: 'sessions#destroy'
 
-  delete "reservations(/:id)", to: 'reservations#destroy', as: 'reservations'
-
-  resources :fps do
+  resources :fps, except: [:index, :new, :create] do
     resources :fp_reservable_times, only: [:new, :create, :destroy]
   end
-  resources :users, except: [:new] do
+  resources :users, except: [:index, :new, :create] do
     resources :reservations, only: [:new, :create, :destroy]
   end
 end

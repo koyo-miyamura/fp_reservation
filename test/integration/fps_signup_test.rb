@@ -20,7 +20,7 @@ class FpsSignupTest < ActionDispatch::IntegrationTest
   test "valid signup" do
     get fps_signup_path
     assert_difference 'Fp.count', 1 do
-      post fps_path, params: { fp: { name:  "Example fp",
+      post fps_signup_path, params: { fp: { name:  "Example fp",
                                          email: "fp@example.com",
                                          password:              "password",
                                          password_confirmation: "password" } }
