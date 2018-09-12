@@ -14,7 +14,7 @@ class Reservation < ApplicationRecord
     reserved_on + consult_minute.minutes
   end
 
-  # 日をまたぐ場合は考慮にいれていない
+  # ビュー用。日をまたぐ場合は考慮にいれていない
   def consultation_period
     reserved_on.strftime("%H:%M") + " ~ " + finish_datetime.strftime("%H:%M")
   end

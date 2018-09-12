@@ -34,4 +34,11 @@ class ReservationTest < ActiveSupport::TestCase
   test "should belong to user" do
     assert_equal @user, @reservation.user
   end
+
+  test "should correct finish datetime" do
+      datetime = Time.new(2018, 12, 31, 23, 30, 1).to_datetime
+      @reservation.reserved_on = datetime
+      datetime_30min_later = Time.new(2019, 1, 1, 0, 0, 1).to_datetime
+      assert_equal @reservation.finish_datetime, datetime_30min_later
+  end
 end

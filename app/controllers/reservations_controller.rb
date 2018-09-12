@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :index, :destroy]
-  before_action :correct_user,   only: [:new, :index, :destroy]
+  before_action :logged_in_user, only: [:new, :create, :destroy]
+  before_action :correct_user,   only: [:new, :create, :destroy]
 
   def new
     @fps = Fp.all.includes(:fp_reservable_times).page(params[:id]) # N+1対策
@@ -27,7 +27,7 @@ class ReservationsController < ApplicationController
       reservable_on: reservation.reserved_on)
     reservation.destroy
     flash[:success] = "予約削除しました"
-    redirect_to root_url
+    redirect_to @user
   end
   
   private
