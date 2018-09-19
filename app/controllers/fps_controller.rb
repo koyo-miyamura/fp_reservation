@@ -46,8 +46,14 @@ class FpsController < ApplicationController
   private
 
     def fp_params
-      params.require(:fp).permit(:name, :email, :password,
-                                  :password_confirmation)
+      params
+      .require(:fp)
+      .permit(
+        :name,
+        :email,
+        :password,
+        :password_confirmation
+      )
     end
 
     # beforeアクション
