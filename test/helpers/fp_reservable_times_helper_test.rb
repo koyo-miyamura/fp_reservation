@@ -3,11 +3,11 @@ require 'test_helper'
 class FpReservableTimesHelperTest < ActionView::TestCase
 
   test "should be minutes 00 or 30" do
-    dt = Time.new(2018, 9, 12, 14, 00, 00) # 水曜
+    dt = Time.new(3000, 9, 12, 14, 00, 00) # 金曜
     res, flash = is_correct_datetime?(dt)
     assert res
 
-    dt = Time.new(2018, 9, 12, 14, 30, 00)
+    dt = Time.new(3000, 9, 12, 14, 30, 00)
     res, flash = is_correct_datetime?(dt)
     assert res
 
