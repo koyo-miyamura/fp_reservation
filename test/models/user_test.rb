@@ -51,6 +51,7 @@ class UserTest < ActiveSupport::TestCase
 
   test "password should be longer than 6 length" do
     @user.password = "a" * 5
+    @user.password_confirmation = "a" * 5
     assert_not @user.valid?
   end
 

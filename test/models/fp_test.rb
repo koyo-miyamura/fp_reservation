@@ -50,6 +50,7 @@ class FpTest < ActiveSupport::TestCase
 
   test "password should be longer than 6 length" do
     @fp.password = "a" * 5
+    @fp.password_confirmation = "a" * 5
     assert_not @fp.valid?
   end
 
