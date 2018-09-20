@@ -1,6 +1,8 @@
 class FpReservableTime < ApplicationRecord
   belongs_to :fp
+
   scope :show_order, -> { order(reservable_on: :asc) }
+  
   validates  :fp_id,         presence: true
   validates  :reservable_on, presence: true
 
