@@ -7,9 +7,8 @@ class FpsController < ApplicationController
   end
 
   def show
-    fp = Fp.find(params[:id])
-    @fp_reservable_times = fp.fp_reservable_times.page(params[:reservable_page])
-    @fp_reservations     = fp.reservations.page(params[:reservation_page])
+    @fp_reservable_times = @fp.fp_reservable_times.page(params[:reservable_page])
+    @fp_reservations     = @fp.reservations.page(params[:reservation_page])
   end
 
   def create
@@ -24,11 +23,9 @@ class FpsController < ApplicationController
   end
 
   def edit
-    @fp = Fp.find(params[:id])
   end
 
   def update
-    @fp = Fp.find(params[:id])
     if @fp.update_attributes(fp_params)
       flash[:success] = "更新しました"
       redirect_to @fp
@@ -38,7 +35,7 @@ class FpsController < ApplicationController
   end
 
   def destroy
-    Fp.find(params[:id]).destroy
+    @fp.destroy
     flash[:success] = "退会しました"
     redirect_to root_url
   end

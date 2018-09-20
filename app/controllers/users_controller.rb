@@ -7,8 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    user = User.find(params[:id])
-    @user_reservations = user.reservations.page(params[:page])
+    @user_reservations = @user.reservations.page(params[:page])
   end
 
   def create
@@ -23,11 +22,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "更新しました"
       redirect_to @user
@@ -37,7 +34,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
+    @user.destroy
     flash[:success] = "退会しました"
     redirect_to root_url
   end
