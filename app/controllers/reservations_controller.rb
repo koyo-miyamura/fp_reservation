@@ -43,7 +43,7 @@ class ReservationsController < ApplicationController
 
     # 正しいユーザーかどうか確認
     def correct_user
-      @user = User.find(params[:user_id])
+      @user ||= User.find(params[:user_id])
       unless current_user?(@user)
         flash[:danger] = "権限がありません"
         redirect_to root_url

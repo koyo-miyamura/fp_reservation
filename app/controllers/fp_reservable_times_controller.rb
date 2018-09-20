@@ -54,7 +54,7 @@ class FpReservableTimesController < ApplicationController
 
     # 正しいユーザーかどうか確認
     def correct_fp
-      @fp = Fp.find(params[:fp_id])
+      @fp ||= Fp.find(params[:fp_id])
       unless current_fp?(@fp)
         flash[:danger] = "権限がありません"
         redirect_to root_url
