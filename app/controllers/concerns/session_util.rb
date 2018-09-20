@@ -2,7 +2,7 @@ module SessionUtil
   extend ActiveSupport::Concern
 
   included do
-    helper_method :current, :current_user, :current_fp, :logged_in?, :logged_in_user?, :logged_in_fp?
+    helper_method :current_user_or_fp, :current_user, :current_fp, :logged_in?, :logged_in_user?, :logged_in_fp?
 
     # 定数定義
     User_role_num = 1
@@ -31,7 +31,7 @@ module SessionUtil
     end
 
     # 現在ログイン中のユーザを返す (いる場合)
-    def current
+    def current_user_or_fp
       current_user || current_fp 
     end
 
