@@ -1,11 +1,11 @@
-include FpReservableTimesHelper
 
 class FpReservableTimesController < ApplicationController
+  include FpReservableTimesHelper
   before_action :logged_in_fp, only: [:new, :create, :destroy]
   before_action :correct_fp,   only: [:new, :create, :destroy]
 
   def new
-    @reservable = FpReservableTime.new()
+    @reservable = FpReservableTime.new
   end
 
   def create
