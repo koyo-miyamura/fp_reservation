@@ -6,8 +6,13 @@ Minitest::Reporters.use!
 class ActiveSupport::TestCase
   fixtures :all
   include ApplicationHelper
-  include SessionsHelper
 
+  # 定数定義
+  User_role_num = 1
+  Fp_role_num   = 10
+  User_role_num.freeze
+  Fp_role_num.freeze
+  
   def logged_in_user_as_test?
     !session[:user_id].nil? && session[:role] == User_role_num
   end
