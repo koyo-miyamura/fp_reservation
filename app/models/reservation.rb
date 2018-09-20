@@ -6,12 +6,10 @@ class Reservation < ApplicationRecord
   validates :user_id,     presence: true
   validates :reserved_on, presence: true
 
-  def consult_minute
-    return 30
-  end
+  CONSULT_MINUTE = 30
 
   def finish_datetime
-    reserved_on + consult_minute.minutes
+    reserved_on + CONSULT_MINUTE.minutes
   end
 
   # ビュー用。日をまたぐ場合は考慮にいれていない

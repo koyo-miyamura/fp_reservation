@@ -4,12 +4,10 @@ class FpReservableTime < ApplicationRecord
   validates  :fp_id,         presence: true
   validates  :reservable_on, presence: true
 
-  def consult_minute
-    return 30
-  end
+  CONSULT_MINUTE = 30
 
   def finish_datetime
-    reservable_on + consult_minute.minutes
+    reservable_on + CONSULT_MINUTE.minutes
   end
 
   # 日をまたぐ場合は考慮にいれていない
