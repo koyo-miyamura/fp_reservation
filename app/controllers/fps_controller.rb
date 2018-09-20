@@ -7,8 +7,8 @@ class FpsController < ApplicationController
   end
 
   def show
-    @fp_reservable_times = @fp.fp_reservable_times.page(params[:reservable_page])
-    @fp_reservations     = @fp.reservations.page(params[:reservation_page])
+    @fp_reservable_times = @fp.fp_reservable_times.show_order.page(params[:reservable_page])
+    @fp_reservations     = @fp.reservations.show_order.page(params[:reservation_page])
   end
 
   def create

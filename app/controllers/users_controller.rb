@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user_reservations = @user.reservations.page(params[:page])
+    @user_reservations = @user.reservations.show_order.page(params[:page])
   end
 
   def create
