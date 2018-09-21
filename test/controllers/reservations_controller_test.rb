@@ -76,13 +76,12 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
 
   test "destroy" do
     log_in_user_as_test(@user)
-    reservation = @user.reservations.new(fp_id: @fp.id, reserved_on: 10.minute.ago)
-    reservation.save
+    reservation = @user.reservations.create(fp_id: @fp.id, reserved_on: Time.new(3000, 9, 12, 15, 00, 00)) # 金曜
     assert_difference 'Reservation.count', -1 do
       delete user_reservation_path(@user, reservation)
     end
-    reservation = @user.reservations.new(fp_id: @fp.id, reserved_on: 10.minute.ago)
-    reservation.save
+    reservation = @user.reservations.create(fp_id: @fp.id, reserved_on: Time.new(3000, 9, 12, 15, 30, 00)) # 金曜
+    # reservation取り消したら、fp_reservable_timeにカラム追加されるかどうか
     assert_difference 'FpReservableTime.count', 1 do
       delete user_reservation_path(@user, reservation)
     end

@@ -2,8 +2,8 @@
 
 reservable1:
   fp_id: 1
-  reservable_on: <%= 10.minutes.ago %>
+  reservable_on: <%= Time.new(3000, 9, 12, 14, 00, 00) %> # 金曜
 
 reservable2:
   fp_id: 1
-  reservable_on: <%= 11.minutes.ago %>
+  reservable_on: <%= Time.new(3000, 9, 12, 14, 03, 00) %>

@@ -79,8 +79,8 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "should have many reservations" do
-    reservation1 = @user.reservations.build(fp_id: 1, reserved_on: 10.minutes.ago)  
-    reservation2 = @user.reservations.build(fp_id: 2, reserved_on: 10.minutes.ago)  
+    reservation1 = @user.reservations.build(fp_id: 1, reserved_on: Time.new(3000, 9, 12, 15, 00, 00)) # 金曜
+    reservation2 = @user.reservations.build(fp_id: 2, reserved_on: Time.new(3000, 9, 12, 15, 00, 00))
     assert @user.reservations.include?(reservation1)
     assert @user.reservations.include?(reservation2)
   end
@@ -90,8 +90,8 @@ class UserTest < ActiveSupport::TestCase
     fp1  = fps(:fp1)
     fp2  = fps(:fp2)
     # buildでは2つ以上たどるリレーションが生成されない様子
-    user.reservations.create(fp_id: fp1.id, reserved_on: 10.minutes.ago)  
-    user.reservations.create(fp_id: fp2.id, reserved_on: 10.minutes.ago)  
+    user.reservations.create(fp_id: fp1.id, reserved_on: Time.new(3000, 9, 12, 15, 00, 00))
+    user.reservations.create(fp_id: fp2.id, reserved_on: Time.new(3000, 9, 12, 15, 00, 00))
     assert user.reserving_fps.include?(fp1)
     assert user.reserving_fps.include?(fp2)
   end

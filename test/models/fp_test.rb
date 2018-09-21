@@ -71,7 +71,7 @@ class FpTest < ActiveSupport::TestCase
   test "associated reservations should be destroyed" do
     @fp.save # destoryするにはsaveが必要
     user = users(:user1)
-    @fp.reservations.create!(user_id: user.id, reserved_on: 10.minutes.ago)
+    @fp.reservations.create!(user_id: user.id, reserved_on: Time.new(3000, 9, 12, 15, 00, 00))
     assert_difference 'Reservation.count', -1 do
       @fp.destroy
     end
@@ -79,22 +79,22 @@ class FpTest < ActiveSupport::TestCase
 
   test "associated fp_reservable_times should be destroyed" do
     @fp.save # destoryするにはsaveが必要
-    @fp.fp_reservable_times.create!(reservable_on: 10.minutes.ago)
+    @fp.fp_reservable_times.create!(reservable_on: Time.new(3000, 9, 12, 15, 00, 00)) # 金曜
     assert_difference 'FpReservableTime.count', -1 do
       @fp.destroy
     end
   end
   
   test "should have many reservations" do
-    reservation1 = @fp.reservations.build(user_id: 1, reserved_on: 10.minutes.ago)  
-    reservation2 = @fp.reservations.build(user_id: 2, reserved_on: 10.minutes.ago)  
+    reservation1 = @fp.reservations.build(user_id: 1, reserved_on: Time.new(3000, 9, 12, 15, 00, 00))  
+    reservation2 = @fp.reservations.build(user_id: 2, reserved_on: Time.new(3000, 9, 12, 15, 30, 00))  
     assert @fp.reservations.include?(reservation1)
     assert @fp.reservations.include?(reservation2)
   end
 
   test "should have many fp_reservable_times" do
-    reservation1 = @fp.fp_reservable_times.build(reservable_on: 10.minutes.ago)  
-    reservation2 = @fp.fp_reservable_times.build(reservable_on: 10.minutes.ago)  
+    reservation1 = @fp.fp_reservable_times.build(reservable_on: Time.new(3000, 9, 12, 15, 00, 00))  
+    reservation2 = @fp.fp_reservable_times.build(reservable_on: Time.new(3000, 9, 12, 15, 30, 00))  
     assert @fp.fp_reservable_times.include?(reservation1)
     assert @fp.fp_reservable_times.include?(reservation2)
   end
@@ -104,8 +104,8 @@ class FpTest < ActiveSupport::TestCase
     user1 = users(:user1)
     user2 = users(:user2)
     # buildでは2つ以上たどるリレーションが生成されない様子
-    fp.reservations.create(user_id: user1.id, reserved_on: 10.minutes.ago)  
-    fp.reservations.create(user_id: user2.id, reserved_on: 10.minutes.ago)  
+    fp.reservations.create(user_id: user1.id, reserved_on: Time.new(3000, 9, 12, 15, 00, 00))  
+    fp.reservations.create(user_id: user2.id, reserved_on: Time.new(3000, 9, 12, 15, 30, 00))  
     assert fp.reserved_users.include?(user1)
     assert fp.reserved_users.include?(user2)
   end

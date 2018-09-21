@@ -3,9 +3,9 @@
 reservation1:
   fp_id: 1
   user_id: 1
-  reserved_on: <%= 10.minutes.ago %>
+  reserved_on: <%= Time.new(3000, 9, 12, 14, 00, 00) %> # 金曜
 
 reservation2:
   fp_id: 1
   user_id: 2
-  reserved_on: <%= 11.minutes.ago %>
+  reserved_on: <%= Time.new(3000, 9, 12, 14, 30, 00) %>
