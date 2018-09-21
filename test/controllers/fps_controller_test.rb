@@ -7,7 +7,7 @@ class FpsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
-    get fps_signup_path
+    get signup_fps_path
     assert_response :success
   end
 

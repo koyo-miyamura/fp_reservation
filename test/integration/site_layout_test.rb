@@ -11,17 +11,17 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     get root_path
     assert_template 'static_pages/home'
     assert_select "a[href=?]", root_path, count: 2
-    assert_select "a[href=?]", fps_signup_path
-    assert_select "a[href=?]", users_signup_path
-    assert_select "a[href=?]", fps_login_path
-    assert_select "a[href=?]", users_login_path
-    get users_signup_path
+    assert_select "a[href=?]", signup_fps_path
+    assert_select "a[href=?]", signup_users_path
+    assert_select "a[href=?]", login_fps_path
+    assert_select "a[href=?]", login_users_path
+    get signup_users_path
     assert_select "title", full_title('ユーザ登録')
-    get users_login_path
+    get login_users_path
     assert_select "title", full_title('ユーザログイン')
-    get fps_signup_path
+    get signup_fps_path
     assert_select "title", full_title('FP登録')
-    get fps_login_path
+    get login_fps_path
     assert_select "title", full_title('FPログイン')
 
     log_in_user_as_test(@user)

@@ -3,9 +3,9 @@ require 'test_helper'
 class FpsSignupTest < ActionDispatch::IntegrationTest
 
   test "invalid signup" do
-    get fps_signup_path
+    get signup_fps_path
     assert_no_difference 'Fp.count' do
-      post fps_signup_path, params: { fp: { name:  "",
+      post signup_fps_path, params: { fp: { name:  "",
                                          email: "fp@invalid",
                                          password:              "foo",
                                          password_confirmation: "bar" } }
@@ -18,9 +18,9 @@ class FpsSignupTest < ActionDispatch::IntegrationTest
   end
 
   test "valid signup" do
-    get fps_signup_path
+    get signup_fps_path
     assert_difference 'Fp.count', 1 do
-      post fps_signup_path, params: { fp: { name:  "Example fp",
+      post signup_fps_path, params: { fp: { name:  "Example fp",
                                          email: "fp@example.com",
                                          password:              "password",
                                          password_confirmation: "password" } }

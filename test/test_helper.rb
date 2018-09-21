@@ -27,13 +27,13 @@ class ActionDispatch::IntegrationTest
   # テストユーザーとしてログインする
   def log_in_user_as_test(user, password: 'password')
     # テストでは直接セッション扱えないのでpostする
-    post users_login_path, params: { session: { email:    user.email,
+    post login_users_path, params: { session: { email:    user.email,
                                                 password: password} }
   end
 
   # テストFPとしてログインする
   def log_in_fp_as_test(fp, password: 'password')
-    post fps_login_path, params: { session: { email:    fp.email,
+    post login_fps_path, params: { session: { email:    fp.email,
                                               password: password} }
   end
 end
