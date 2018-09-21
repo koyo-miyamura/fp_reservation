@@ -8,7 +8,7 @@
       <li>日曜休業</li>
       <li>入力は30分刻みで開始時間を入力してください</li>
     </ul>
-    <%= form_for(@reservable, url: fp_fp_reservable_times_path) do |f| %>
+    <%= form_for(@fp_reservable_time, url: fp_fp_reservable_times_path) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
       <%= f.label :"予約を受け付ける時間" %>
