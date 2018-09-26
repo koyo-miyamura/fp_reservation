@@ -35,8 +35,11 @@ class FpsController < ApplicationController
   end
 
   def destroy
-    @fp.destroy
-    flash[:success] = "退会しました"
+    if @fp.destroy
+      flash[:success] = "退会しました"
+    else
+      flash[:danger]  = "退会に失敗しました"
+    end
     redirect_to root_url
   end
 

@@ -34,8 +34,11 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    flash[:success] = "退会しました"
+    if @user.destroy
+      flash[:success] = "退会しました"
+    else
+      flash[:danger]  = "退会できませんでした"
+    end
     redirect_to root_url
   end
 

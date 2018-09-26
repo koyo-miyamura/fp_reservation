@@ -26,8 +26,11 @@ class FpReservableTimesController < ApplicationController
   end
 
   def destroy
-    FpReservableTime.find(params[:id]).destroy
-    flash[:success] = "予約受付削除しました"
+    if FpReservableTime.find(params[:id]).destroy
+      flash[:success] = "予約受付削除しました"
+    else
+      flash[:danger]  = "予約受付削除できませんでした"
+    end
     redirect_to current_fp
   end
 
