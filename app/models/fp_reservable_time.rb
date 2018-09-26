@@ -2,10 +2,10 @@ class FpReservableTime < ApplicationRecord
   belongs_to :fp
 
   scope :show_order, -> { order(reservable_on: :asc) }
-  
+
   validates :fp_id,
     presence: true,
-    uniqueness: { 
+    uniqueness: {
       scope: :reservable_on,
       message: "Already reservable"
     }
@@ -21,7 +21,7 @@ class FpReservableTime < ApplicationRecord
   def consultation_period
     reservable_on.strftime("%H:%M") + " ~ " + finish_datetime.strftime("%H:%M")
   end
-  
+
   ##### validationメソッド
 
   # reservable_onはDatetimeオブジェクトではなくTimeオブジェクト
@@ -33,28 +33,28 @@ class FpReservableTime < ApplicationRecord
 
     datetime = reservable_on.to_datetime
     minute   = datetime.minute # minuteはtimeオブジェクトでは使えない
-    unless  minute == 0 || minute == 30
+    unless [0, 30].include?(minute)
       errors.add(:reservable_on, "予約時間は毎時 00 分 もしくは 30 分としてください")
       return
     end
-    
+
     if reservable_on <= Time.now
       errors.add(:reservable_on, "過去の時間に予約はできません")
       return
     end
-    
-    if reservable_on.wday == 0
+
+    if reservable_on.wday.zero?
       errors.add(:reservable_on, "日曜は休業日です")
       return
-    end    
-    
+    end
+
     y = reservable_on.year
     m = reservable_on.month
     d = reservable_on.day
     is_correct_at_saturday = (Time.new(y, m, d, 11, 00, 00) <= reservable_on) && (reservable_on < Time.new(y, m, d, 15, 00, 00))
     is_correct_at_weekday  = (Time.new(y, m, d, 10, 00, 00) <= reservable_on) && (reservable_on < Time.new(y, m, d, 18, 00, 00))
-    is_weekday = ([1,2,3,4,5].include?(reservable_on.wday))
-    
+    is_weekday = [1, 2, 3, 4, 5].include?(reservable_on.wday)
+
     if reservable_on.saturday? && !is_correct_at_saturday
       errors.add(:reservable_on, "土曜の予約枠は11:00 ~ 15:00です")
       return
