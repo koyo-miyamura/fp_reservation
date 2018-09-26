@@ -1,4 +1,6 @@
 class FpReservableTime < ApplicationRecord
+  include ModelConstants
+  
   belongs_to :fp
 
   scope :show_order, -> { order(reservable_on: :asc) }
@@ -11,10 +13,8 @@ class FpReservableTime < ApplicationRecord
     }
   validate :is_correct_reservable_on?
 
-  CONSULT_MINUTE = 30
-
   def finish_datetime
-    reservable_on + CONSULT_MINUTE.minutes
+    reservable_on + CONSULTING_DURATION
   end
 
   # 日をまたぐ場合は考慮にいれていない
