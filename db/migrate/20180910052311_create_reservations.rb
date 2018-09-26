@@ -6,9 +6,7 @@ class CreateReservations < ActiveRecord::Migration[5.1]
       t.datetime :reserved_on, null: false
 
       t.timestamps
-      t.index :fp_id
-      t.index :user_id
-      t.index [:fp_id,   :reserved_on]
+      t.index [:fp_id,   :reserved_on], unique: true
       t.index [:user_id, :reserved_on]
     end
   end

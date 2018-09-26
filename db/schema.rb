@@ -17,8 +17,7 @@ ActiveRecord::Schema.define(version: 20180910085228) do
     t.datetime "reservable_on", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["fp_id", "reservable_on"], name: "index_fp_reservable_times_on_fp_id_and_reservable_on"
-    t.index ["fp_id"], name: "index_fp_reservable_times_on_fp_id"
+    t.index ["fp_id", "reservable_on"], name: "index_fp_reservable_times_on_fp_id_and_reservable_on", unique: true
   end
 
   create_table "fps", force: :cascade do |t|
@@ -36,10 +35,8 @@ ActiveRecord::Schema.define(version: 20180910085228) do
     t.datetime "reserved_on", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["fp_id", "reserved_on"], name: "index_reservations_on_fp_id_and_reserved_on"
-    t.index ["fp_id"], name: "index_reservations_on_fp_id"
+    t.index ["fp_id", "reserved_on"], name: "index_reservations_on_fp_id_and_reserved_on", unique: true
     t.index ["user_id", "reserved_on"], name: "index_reservations_on_user_id_and_reserved_on"
-    t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

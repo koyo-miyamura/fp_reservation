@@ -22,14 +22,17 @@ class ReservationsController < ApplicationController
 
   def destroy
     reservation = Reservation.find(params[:id])
-    FpReservableTime.create(
+    if FpReservableTime.create(
       fp_id:         reservation.fp.id,
       reservable_on: reservation.reserved_on)
-    reservation.destroy
-    flash[:success] = "予約削除しました"
+      reservation.destroy
+      flash[:success] = "予約削除しました"
+    else
+      flash[:danger]  = "予約削除できませんでした"
+    end
     redirect_to @user
   end
-  
+
   private
     # beforeアクション
 
@@ -43,7 +46,7 @@ class ReservationsController < ApplicationController
 
     # 正しいユーザーかどうか確認
     def correct_user
-      @user = User.find(params[:user_id])
+      @user ||= User.find(params[:user_id])
       unless current_user?(@user)
         flash[:danger] = "権限がありません"
         redirect_to root_url

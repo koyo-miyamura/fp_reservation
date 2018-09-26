@@ -5,7 +5,7 @@ class ReservationTest < ActiveSupport::TestCase
   def setup
     @user = users(:user1)
     @fp   = fps(:fp1)
-    @reservation = @fp.reservations.build(user_id: @user.id, reserved_on: 10.minutes.ago)
+    @reservation = @fp.reservations.build(user_id: @user.id, reserved_on: Time.new(3000, 9, 12, 15, 00, 00)) # 金曜
   end
 
   test "should be valid" do

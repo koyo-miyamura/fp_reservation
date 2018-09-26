@@ -27,8 +27,8 @@ class FpsEditTest < ActionDispatch::IntegrationTest
     email = "foo@bar.com"
     patch fp_path(@fp), params: { fp: { name:  name,
                                               email: email,
-                                              password:              "password",
-                                              password_confirmation: "password" } }
+                                              password:              "",
+                                              password_confirmation: "" } }
     assert_redirected_to @fp
     assert_not flash.empty?
     # 小文字で保管されているか確認

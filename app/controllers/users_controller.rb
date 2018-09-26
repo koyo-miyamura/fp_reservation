@@ -7,8 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    user = User.find(params[:id])
-    @user_reservations = user.reservations.page(params[:page])
+    @user_reservations = @user.reservations.show_order.page(params[:page])
   end
 
   def create
@@ -23,11 +22,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "更新しました"
       redirect_to @user
@@ -37,16 +34,25 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "退会しました"
+    if @user.destroy
+      flash[:success] = "退会しました"
+    else
+      flash[:danger]  = "退会できませんでした"
+    end
     redirect_to root_url
   end
 
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password,
-                                  :password_confirmation)
+      params
+      .require(:user)
+      .permit(
+        :name,
+        :email,
+        :password,
+        :password_confirmation
+      )
     end
 
     # beforeアクション
@@ -61,7 +67,7 @@ class UsersController < ApplicationController
 
     # 正しいユーザーかどうか確認
     def correct_user
-      @user = User.find(params[:id])
+      @user ||= User.find(params[:id])
       unless current_user?(@user)
         flash[:danger] = "権限がありません"
         redirect_to root_url
