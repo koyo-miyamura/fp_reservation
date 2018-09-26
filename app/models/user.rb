@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  include Constants
+  include ModelConstants
 
   has_many :reservations,  dependent: :destroy
   has_many :reserving_fps, through: :reservations, source: :fp

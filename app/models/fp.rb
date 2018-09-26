@@ -1,5 +1,5 @@
 class Fp < ApplicationRecord
-  include Constants
+  include ModelConstants
 
   has_many :reservations,        dependent: :destroy
   has_many :fp_reservable_times, dependent: :destroy
