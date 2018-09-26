@@ -8,17 +8,17 @@ class ActiveSupport::TestCase
   include ApplicationHelper
 
   # 定数定義
-  User_role_num = 1
-  Fp_role_num   = 10
-  User_role_num.freeze
-  Fp_role_num.freeze
-  
+  USER_ROLE_NUM = 1
+  FP_ROLE_NUM   = 10
+  USER_ROLE_NUM.freeze
+  FP_ROLE_NUM.freeze
+
   def logged_in_user_as_test?
-    !session[:user_id].nil? && session[:role] == User_role_num
+    !session[:user_id].nil? && session[:role] == USER_ROLE_NUM
   end
 
   def logged_in_fp_as_test?
-    !session[:fp_id].nil? && session[:role] == Fp_role_num
+    !session[:fp_id].nil? && session[:role] == FP_ROLE_NUM
   end
 end
 

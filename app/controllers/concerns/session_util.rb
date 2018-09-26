@@ -2,13 +2,14 @@ module SessionUtil
   extend ActiveSupport::Concern
 
   included do
-    helper_method :current_user_or_fp, :current_user, :current_fp, :logged_in?, :logged_in_user?, :logged_in_fp?
+    helper_method :current_user_or_fp, :current_user, :current_fp,
+                  :logged_in?, :logged_in_user?, :logged_in_fp?
 
     # 定数定義
-    User_role_num = 1
-    Fp_role_num   = 10
-    User_role_num.freeze
-    Fp_role_num.freeze
+    USER_ROLE_NUM = 1
+    FP_ROLE_NUM   = 10
+    USER_ROLE_NUM.freeze
+    FP_ROLE_NUM.freeze
 
     # ユーザログイン
     def log_in_user(user)
@@ -17,7 +18,7 @@ module SessionUtil
       @current_fp       = nil
 
       session[:user_id] = user.id
-      session[:role]    = User_role_num
+      session[:role]    = USER_ROLE_NUM
     end
 
     # FPログイン
@@ -27,7 +28,7 @@ module SessionUtil
       @current_user   = nil
 
       session[:fp_id] = fp.id
-      session[:role]  = Fp_role_num
+      session[:role]  = FP_ROLE_NUM
     end
 
     # 現在ログイン中のユーザを返す (いる場合)
@@ -37,18 +38,18 @@ module SessionUtil
 
     # 現在ログイン中のユーザを返す (いる場合)
     def current_user
-      if session[:user_id] && session[:role] == User_role_num
+      if session[:user_id] && session[:role] == USER_ROLE_NUM
         @current_user ||= User.find_by(id: session[:user_id]) # 2回目以降のクエリを防ぐ
       end
     end
 
     # 現在ログイン中のFPを返す (いる場合)
     def current_fp
-      if session[:fp_id] && session[:role] == Fp_role_num
+      if session[:fp_id] && session[:role] == FP_ROLE_NUM
         @current_fp ||= Fp.find_by(id: session[:fp_id]) # 2回目以降のクエリを防ぐ
       end
     end
-    
+
     # 渡されたユーザがログイン済みであればtrueを返す
     def current_user?(user)
       user == current_user
