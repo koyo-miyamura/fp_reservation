@@ -66,12 +66,8 @@ class FpReservableTime < ApplicationRecord
   ##### クラスメソッド
 
   def self.convert_str_to_time(str_reservable_on)
-    begin
-      # DatetimeオブジェクトではなくTimeオブジェクトにしないと日本タイムゾーンにならない
-      reservable_on = Time.strptime(str_reservable_on, "%Y/%m/%d %H:%M")
-    rescue => exception
-      return false
-    end
-    return reservable_on
+    Time.strptime(str_reservable_on, "%Y/%m/%d %H:%M")
+  rescue ArgumentError
+    nil
   end
 end
